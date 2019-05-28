@@ -39,8 +39,6 @@ class ViewController: UIViewController{
         secondPicker.delegate = self
         minutePicker.dataSource = self
         minutePicker.delegate = self
-        identifier = UUID().uuidString
-        
         
         // monitor background/foreground moves for timer to stay accurate
         let notificationCenter = NotificationCenter.default
@@ -187,30 +185,20 @@ class ViewController: UIViewController{
     }
     
     func scheduleNotification(){
-        // notification content
         let content = UNMutableNotificationContent()
         content.title = "INTERVAL TIMER"
         content.sound = UNNotificationSound.default
         
-        // notification trigger
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(userSeconds), repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
-        //let date = Date().addingTimeInterval(Double(userSeconds))
-        
-        //let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-        
-        //let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)        // create the request
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-        // register the request
         UNUserNotificationCenter.current().add(request) { (error) in
-            // check the error parameter and handle any errors
         }
     }
     
     func cancelNotification(){
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
     
     func initialiseTimer(){
