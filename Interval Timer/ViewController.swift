@@ -76,7 +76,7 @@ class ViewController: UIViewController{
         // gone 90 seconds
         let time = Int(Date().timeIntervalSince(backgroundTimer))
         
-        // 90 seconds + (timer length 60 seconds - 50 seconds left on current interval) = 100 seconds total elapsed
+        // 90 seconds + (timer length 60 seconds - 50 seconds left on current interval) = 100 seconds total elapsed on current interval
         let elapsed = time+(userSeconds-counting)
         print("time elapsed: \(elapsed)")
         
