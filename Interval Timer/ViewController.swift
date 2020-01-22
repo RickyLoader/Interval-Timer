@@ -72,9 +72,15 @@ class ViewController: UIViewController{
             return;
         }
         print("App moved to foreground!")
+        
+        // gone 90 seconds
         let time = Int(Date().timeIntervalSince(backgroundTimer))
+        
+        // 90 seconds + (timer length 60 seconds - 50 seconds left on current interval) = 100 seconds total elapsed
         let elapsed = time+(userSeconds-counting)
         print("time elapsed: \(elapsed)")
+        
+        // timer length 60 seconds - (100 seconds total elapsed % timer length 60 seconds) = 20 seconds is new timer value
         counting = userSeconds-(elapsed%userSeconds)
     }
     
